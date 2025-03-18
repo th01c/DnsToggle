@@ -20,7 +20,7 @@ class DnsTileService : TileService() {
     private fun updateTile() {
         qsTile?.apply {
             state = if (isDnsEnabled()) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
-            label = if (isDnsEnabled()) "dns.adguard-dns.com" else "DNS Off"  // Set the label to "AdGuard" when enabled
+            label = if (isDnsEnabled()) "AdGuard On" else "AdGuard Off"  // Set the label to "AdGuard" when enabled
             icon = if (isDnsEnabled()) Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_on)
             else Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_off)
             updateTile()
