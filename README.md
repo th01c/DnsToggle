@@ -7,7 +7,7 @@ The idea for this app arose from past issues I encountered with other DNS toggle
 ## Important
 Make sure to either make the app as system app or give it WRITE_SECURE_SETTINGS
 
-adb shell pm grant com.dnstoggle.sba android.permission.WRITE_SECURE_SETTINGS
+` ` `adb shell pm grant com.dnstoggle.sba android.permission.WRITE_SECURE_SETTINGS ` ` `
 
 
 ### Screenshots
