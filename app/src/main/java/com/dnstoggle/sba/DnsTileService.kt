@@ -2,7 +2,6 @@ package com.dnstoggle.sba
 
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import android.content.ContentResolver
 import android.provider.Settings
 import android.util.Log
 import android.graphics.drawable.Icon
@@ -21,7 +20,7 @@ class DnsTileService : TileService() {
     private fun updateTile() {
         qsTile?.apply {
             state = if (isDnsEnabled()) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
-            label = if (isDnsEnabled()) "dns.adguard-dns.com" else "DNS Off"
+            label = if (isDnsEnabled()) "dns.adguard-dns.com" else "DNS Off"  // Set the label to "AdGuard" when enabled
             icon = if (isDnsEnabled()) Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_on)
             else Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_off)
             updateTile()

@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId = "com.dnstoggle.sba"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "2.3.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +24,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
