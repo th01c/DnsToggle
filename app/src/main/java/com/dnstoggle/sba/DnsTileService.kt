@@ -8,7 +8,6 @@ import android.graphics.drawable.Icon
 import android.widget.Toast
 
 class DnsTileService : TileService() {
-
     private val adguardDns = "dns.adguard-dns.com"
     private val privateDnsMode = "private_dns_mode"
     private val privateDnsSpecifier = "private_dns_specifier"
