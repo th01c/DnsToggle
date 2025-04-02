@@ -13,20 +13,32 @@ class DnsTileService : TileService() {
     private val privateDnsSpecifier = "private_dns_specifier"
 
     override fun onStartListening() {
+        Log.d("DnsTileService", "onStartListening")
         updateTile()
     }
 
     override fun onClick() {
+        Log.d("DnsTileService", "onClick")
         toggleDns()
         updateTile()
     }
 
     private fun updateTile() {
         qsTile?.apply {
-            state = if (isDnsEnabled()) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
-            label = if (isDnsEnabled()) "AdGuard On" else "AdGuard Off"
-            icon = if (isDnsEnabled()) Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_on)
-            else Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_off)
+            val enabled = isDnsEnabled()
+            state = if (enabled) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
+            label = if (enabled) "AdGuard On" else "AdGuard Off"
+
+            if (enabled) {
+                icon = Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_on)
+            } else {
+                icon = Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_off)
+            }
+
+            if (state == Tile.STATE_ACTIVE) {
+                icon = Icon.createWithResource(this@DnsTileService, R.drawable.ic_dns_on)
+            }
+
             updateTile()
         }
     }
@@ -45,6 +57,7 @@ class DnsTileService : TileService() {
     private fun isDnsEnabled(): Boolean {
         val mode = Settings.Global.getString(contentResolver, privateDnsMode)
         val specifier = Settings.Global.getString(contentResolver, privateDnsSpecifier)
+        Log.d("DnsTileService", "isDnsEnabled mode: $mode specifier: $specifier")
 
         return mode == "hostname" && specifier == adguardDns
     }
