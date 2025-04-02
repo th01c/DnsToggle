@@ -11,8 +11,8 @@ android {
         applicationId = "com.dnstoggle.sba"
         minSdk = 29
         targetSdk = 35
-        versionCode = 3
-        versionName = "2.3.4"
+        versionCode = 2
+        versionName = "2.3.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

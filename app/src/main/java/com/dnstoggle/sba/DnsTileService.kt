@@ -6,9 +6,6 @@ import android.provider.Settings
 import android.util.Log
 import android.graphics.drawable.Icon
 import android.widget.Toast
-import android.app.Service
-import android.content.Intent
-import android.os.IBinder
 
 class DnsTileService : TileService() {
     private val adguardDns = "dns.adguard-dns.com"
@@ -18,8 +15,6 @@ class DnsTileService : TileService() {
     override fun onStartListening() {
         Log.d("DnsTileService", "onStartListening")
         updateTile()
-        //Start service to keep alive in background.
-        startService(Intent(this, DnsKeepAliveService::class.java))
     }
 
     override fun onClick() {
@@ -65,43 +60,5 @@ class DnsTileService : TileService() {
         Log.d("DnsTileService", "isDnsEnabled mode: $mode specifier: $specifier")
 
         return mode == "hostname" && specifier == adguardDns
-    }
-}
-
-class DnsKeepAliveService : Service() {
-
-    override fun onCreate() {
-        super.onCreate()
-        Log.d("DnsKeepAliveService", "Service created")
-    }
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("DnsKeepAliveService", "Service started")
-        //Your service logic here.
-        performKeepAliveTask()
-        return START_STICKY
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("DnsKeepAliveService", "Service destroyed")
-    }
-
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
-    }
-
-    private fun performKeepAliveTask() {
-        // Example: just log a message every 10 seconds.
-        Thread {
-            while(true) {
-                try {
-                    Log.d("DnsKeepAliveService", "Keep alive task running")
-                    Thread.sleep(10000) // 10 seconds
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-            }
-        }.start()
     }
 }
